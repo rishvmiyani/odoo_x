@@ -8,7 +8,7 @@
 - [Future Scope](#future-scope)
 
 
-# **FleetFlow AI**
+## **FleetFlow AI**
 
 FleetFlow AI is a centralized, rule-based digital fleet management platform built to replace inefficient manual logbooks with a scalable, AI-powered logistics command center. The system optimizes the complete lifecycle of a delivery fleet — from vehicle registry and trip dispatching to predictive maintenance, fuel anomaly detection, and financial performance tracking.
 
@@ -153,47 +153,47 @@ fleetflow-ai/
 ## **Setup guide**
 
 1. Clone the Repository
-
+```bash
     git clone https://github.com/your-username/fleetflow-ai.git
     
     cd fleetflow-ai
-
+```
 2. Install Dependencies
-
+```bash
     npm install
-
+```
 3. Configure Environment Variables
 
   Create a .env.local file using .env.example:
-
+```bash
   DATABASE_URL="postgresql://postgres:password@localhost:5432/fleetflow"
   
   NEXTAUTH_SECRET="your-secret-key-here"
   
   NEXTAUTH_URL="http://localhost:3000"
-
+```
 4. Setup Database
 
 - Push Prisma schema:
-
+```bash
   npm run db:push
-
+```
 - Seed database with realistic data:
-
+```bash
   npm run db:seed
-
+```
 - Open Prisma Studio (optional):
-
+```bash
   npm run db:studio
-
+```
 5. Run Development Server
-   
+```bash
   npm run dev
-
+```
 Application will run at:
-
+```bash
   http://localhost:3000
-
+```
 ## **Demo Login Credentials**
 
 All seeded users use the password:
