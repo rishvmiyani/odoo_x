@@ -3,7 +3,7 @@
 - [Solution](#Solution)
 - [Tech Stack](#tech-stack)
 - [Roles](#Roles)
-- [Setup Guid](#setup-guide)
+- [Setup Guide](#setup-guide)
 - [Folder Structure](#folder-structure)
 - [Future Scope](#future-scope)
 
@@ -200,13 +200,13 @@ All seeded users use the password:
 
 FleetFlow@2025
 
-- Fleet Manager	fleet.manager@fleetflow.com
+- Fleet Manager	fleet.manager@fleetflow.ai
 
-- Dispatcher	dispatcher@fleetflow.com
+- Dispatcher	dispatcher@fleetflow.ai
 
-- Safety Officer	safety@fleetflow.com
+- Safety Officer	safety@fleetflow.ai
 
-- Financial Analyst	finance@fleetflow.com
+- Financial Analyst	finance@fleetflow.ai
 
 ## **Core Modules**
 
