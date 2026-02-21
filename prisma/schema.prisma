@@ -1,0 +1,188 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum UserRole {
+  FLEET_MANAGER
+  DISPATCHER
+  SAFETY_OFFICER
+  FINANCIAL_ANALYST
+}
+
+enum VehicleStatus {
+  AVAILABLE
+  ON_TRIP
+  IN_SHOP
+  OUT_OF_SERVICE
+}
+
+enum VehicleType {
+  TRUCK
+  VAN
+  BIKE
+}
+
+enum TripStatus {
+  DRAFT
+  DISPATCHED
+  COMPLETED
+  CANCELLED
+}
+
+enum DriverStatus {
+  ON_DUTY
+  OFF_DUTY
+  SUSPENDED
+}
+
+enum MaintenanceType {
+  OIL_CHANGE
+  TIRE_ROTATION
+  BRAKE_SERVICE
+  ENGINE_REPAIR
+  INSPECTION
+  OTHER
+}
+
+model User {
+  id           String   @id @default(cuid())
+  name         String
+  email        String   @unique
+  passwordHash String
+  role         UserRole @default(DISPATCHER)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@index([email])
+  @@map("users")
+}
+
+model Vehicle {
+  id              String        @id @default(cuid())
+  name            String
+  model           String
+  licensePlate    String        @unique
+  type            VehicleType
+  maxCapacity     Float
+  currentOdometer Float         @default(0)
+  status          VehicleStatus @default(AVAILABLE)
+  region          String?
+  acquisitionCost Float         @default(0)
+  acquisitionDate DateTime?
+  isRetired       Boolean       @default(false)
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  trips           Trip[]
+  maintenanceLogs MaintenanceLog[]
+  fuelExpenses    FuelExpense[]
+
+  @@index([status])
+  @@index([type])
+  @@index([isRetired])
+  @@map("vehicles")
+}
+
+model Driver {
+  id              String       @id @default(cuid())
+  name            String
+  email           String       @unique
+  phone           String?
+  licenseNumber   String       @unique
+  licenseCategory String[]
+  licenseExpiry   DateTime
+  status          DriverStatus @default(OFF_DUTY)
+  safetyScore     Float        @default(100.0)
+  totalTrips      Int          @default(0)
+  completedTrips  Int          @default(0)
+  createdAt       DateTime     @default(now())
+  updatedAt       DateTime     @updatedAt
+
+  trips Trip[]
+
+  @@index([status])
+  @@index([licenseExpiry])
+  @@map("drivers")
+}
+
+model Trip {
+  id                 String     @id @default(cuid())
+  tripCode           String     @unique
+  vehicleId          String
+  driverId           String
+  originAddress      String
+  destinationAddress String
+  cargoDescription   String?
+  cargoWeight        Float
+  distanceKm         Float?
+  startOdometer      Float?
+  endOdometer        Float?
+  status             TripStatus @default(DRAFT)
+  revenue            Float      @default(0)
+  scheduledAt        DateTime
+  dispatchedAt       DateTime?
+  completedAt        DateTime?
+  cancelledAt        DateTime?
+  cancelReason       String?
+  notes              String?
+  createdAt          DateTime   @default(now())
+  updatedAt          DateTime   @updatedAt
+
+  vehicle      Vehicle       @relation(fields: [vehicleId], references: [id])
+  driver       Driver        @relation(fields: [driverId], references: [id])
+  fuelExpenses FuelExpense[]
+
+  @@index([status])
+  @@index([vehicleId])
+  @@index([driverId])
+  @@index([scheduledAt])
+  @@map("trips")
+}
+
+model MaintenanceLog {
+  id            String          @id @default(cuid())
+  vehicleId     String
+  type          MaintenanceType
+  description   String
+  cost          Float
+  serviceDate   DateTime
+  nextServiceKm Float?
+  vendorName    String?
+  invoiceRef    String?
+  isResolved    Boolean         @default(false)
+  resolvedAt    DateTime?
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+
+  vehicle Vehicle @relation(fields: [vehicleId], references: [id])
+
+  @@index([vehicleId])
+  @@index([isResolved])
+  @@map("maintenance_logs")
+}
+
+model FuelExpense {
+  id             String   @id @default(cuid())
+  vehicleId      String
+  tripId         String?
+  liters         Float
+  costPerLiter   Float
+  totalCost      Float
+  odometerAtFuel Float
+  fuelDate       DateTime
+  station        String?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  vehicle Vehicle @relation(fields: [vehicleId], references: [id])
+  trip    Trip?   @relation(fields: [tripId], references: [id])
+
+  @@index([vehicleId])
+  @@index([fuelDate])
+  @@map("fuel_expenses")
+}
+
