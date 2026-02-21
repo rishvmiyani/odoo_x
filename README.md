@@ -3,7 +3,7 @@
 - [Solution](#Solution)
 - [Tech Stack](#tech-stack)
 - [Roles](#Roles)
-- [Setup Guid](#setup-guid)
+- [Setup Guid](#setup-guide)
 - [Folder Structure](#folder-structure)
 - [Future Scope](#future-scope)
 
