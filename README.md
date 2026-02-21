@@ -7,6 +7,64 @@
 - [Folder Structure](#folder-structure)
 - [Future Scope](#future-scope)
 
+demo video: - https://youtu.be/lXcF5c3WZ-8?si=4cXr1DJUOPfkvwxi
+
+🚀 Live Demo Credentials
+Role	Email	Password
+
+| Role                                  | Email                   | Password       |
+| ------------------------------------- | ----------------------- | -------------- |
+| Fleet Manager (Full Access)           | manager@fleetflow.ai    | FleetFlow@2025 |
+| Dispatcher (Trips/Vehicles)           | dispatcher@fleetflow.ai | FleetFlow@2025 |
+| Safety Officer (Drivers/Trips)        | safety@fleetflow.ai     | FleetFlow@2025 |
+| Financial Analyst (Analytics/Exports) | analyst@fleetflow.ai    | FleetFlow@2025 |
+
+Demo Flow: Login → Dashboard KPIs → Create Trip (with capacity/license checks) → View AI Predictions → Export PDF Report.
+
+📱 Key Features – Enterprise-Ready
+Module	Core Features	AI Integration
+Command Center	Live KPIs, donut/line charts, recent trips	AI alerts panel
+Vehicles	CRUD + status lifecycle, capacity checks	Maintenance predictions
+Trips	Multi-step dispatch, transaction safety	Safety scoring triggers
+Drivers	License expiry blocking, performance metrics	Real-time safety recalc
+Maintenance	Service logs + shop status toggle	Predictive alerts
+Fuel	Auto-total calc + history	Anomaly warnings
+Analytics	4 Recharts + filters/exports	Cost predictions + ROI
+Auth	4 roles, middleware protection	Role-specific dashboards
+
+🚀 Quickstart (5 Minutes to Demo)
+Clone & Install
+
+bash
+git clone <your-repo> fleetflow-ai
+cd fleetflow-ai
+npm install
+Database Setup (Local PostgreSQL)
+
+bash
+cp .env.example .env.local
+# Edit DATABASE_URL with your postgres://... creds
+npm run db:push
+npm run db:seed  # Realistic data: 8 vehicles, 20 trips, etc.
+Run Development
+
+bash
+npm run dev
+Open http://localhost:3000 → Login with demo creds!
+
+Production Build
+
+bash
+npm run build
+npm start
+Docker Support: docker-compose up.
+
+✅ Complete End-to-End: No mocks – full CRUD + business logic + transactions
+✅ AI Differentiators: 4 custom engines (statistical + rule-based)
+✅ Production Polish: RBAC, optimistic UI, error boundaries, exports
+✅ Scalable Arch: Singleton Prisma, SWR caching, strict TS
+✅ Hackathon-Ready: Seed data, multi-role demo, 1-click deploy
+✅ Zero Fluff: No emojis, no any, no console.logs
 
 ## **FleetFlow AI**
 
